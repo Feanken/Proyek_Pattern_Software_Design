@@ -11,7 +11,7 @@ namespace Proyek_Pattern_Software_Design.Repository
     {
         public static MsUser createnewuser(string email, string username,  string password, string gender, DateTime date)
         {
-            DatabaseEntities1 db = new DatabaseEntities1 ();
+            Database1Entities db = new Database1Entities ();
             MsUser user = UserFactory.createnewUser(email, username, password, gender, date);
             db.MsUsers.Add(user);
             db.SaveChanges();
@@ -19,13 +19,13 @@ namespace Proyek_Pattern_Software_Design.Repository
         }
         public static MsUser LoginUser(string email, string password)
         {
-            DatabaseEntities1 db = new DatabaseEntities1 ();
+            Database1Entities db = new Database1Entities ();
             MsUser loginuser = (from x in db.MsUsers where x.UserEmail == email && x.UserPassword == password select x).FirstOrDefault();
             return loginuser;
         }
         public static MsUser getuserid(int id)
         {
-            DatabaseEntities1 db = new DatabaseEntities1();
+            Database1Entities db = new Database1Entities();
             MsUser user = (from x in db.MsUsers where x.UserID == id select x).FirstOrDefault();
             return user;
         }

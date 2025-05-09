@@ -16,7 +16,7 @@ namespace Proyek_Pattern_Software_Design.Model
     {
         public int TransactionID { get; set; }
         public int JewelID { get; set; }
-        public int Quantity { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
         public virtual MsJewel MsJewel { get; set; }
         public virtual TransactionHeader TransactionHeader { get; set; }

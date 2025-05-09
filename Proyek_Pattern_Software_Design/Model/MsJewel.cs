@@ -22,11 +22,11 @@ namespace Proyek_Pattern_Software_Design.Model
         }
     
         public int JewelID { get; set; }
-        public int BrandID { get; set; }
-        public int CategoryID { get; set; }
+        public Nullable<int> BrandID { get; set; }
+        public Nullable<int> CategoryID { get; set; }
         public string JewelName { get; set; }
-        public int JewelPrice { get; set; }
-        public int JewelReleaseYear { get; set; }
+        public Nullable<int> JewelPrice { get; set; }
+        public Nullable<int> JewelReleaseYear { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }

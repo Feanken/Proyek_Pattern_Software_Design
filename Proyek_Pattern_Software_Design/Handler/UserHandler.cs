@@ -7,6 +7,6 @@ namespace Proyek_Pattern_Software_Design.Handler
 {
     public class UserHandler
     {
-        public static void 
+
     }
 }

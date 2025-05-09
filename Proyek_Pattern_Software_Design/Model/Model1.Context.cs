@@ -13,10 +13,10 @@ namespace Proyek_Pattern_Software_Design.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DatabaseEntities1 : DbContext
+    public partial class Database1Entities : DbContext
     {
-        public DatabaseEntities1()
-            : base("name=DatabaseEntities1")
+        public Database1Entities()
+            : base("name=Database1Entities")
         {
         }
     

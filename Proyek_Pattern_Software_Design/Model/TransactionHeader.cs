@@ -14,13 +14,20 @@ namespace Proyek_Pattern_Software_Design.Model
     
     public partial class TransactionHeader
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TransactionHeader()
+        {
+            this.TransactionDetails = new HashSet<TransactionDetail>();
+        }
+    
         public int TransactionID { get; set; }
-        public int UserID { get; set; }
-        public System.DateTime TransactionDate { get; set; }
+        public Nullable<int> UserID { get; set; }
+        public Nullable<System.DateTime> TransactionDate { get; set; }
         public string PaymentMethod { get; set; }
         public string TransactionStatus { get; set; }
     
         public virtual MsUser MsUser { get; set; }
-        public virtual TransactionDetail TransactionDetail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }
     }
 }
