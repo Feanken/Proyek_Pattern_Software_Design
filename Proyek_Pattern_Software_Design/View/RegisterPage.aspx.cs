@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Proyek_Pattern_Software_Design.Controller;
+using Proyek_Pattern_Software_Design.Model;
 using Proyek_Pattern_Software_Design.Repository;
+using Proyek_Pattern_Software_Design.Utils;
 
 namespace Proyek_Pattern_Software_Design.View
 {
     public partial class RegisterPage : System.Web.UI.Page
     {
+        UserController UserController = new UserController();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["MsUser"] != null || Request.Cookies["MsUser_Cookie"] != null)
@@ -30,63 +35,25 @@ namespace Proyek_Pattern_Software_Design.View
 
         protected void ButtonRegister_Click(object sender, EventArgs e)
         {
-            String email = TextBoxEmail.Text;
-            String username = TextBoxUsername.Text;
-            String password = TextBoxPassword.Text;
-            String confirmpassword = TextBoxConfirmPassword.Text;
-            String gendervalue = RadioButtonGender.SelectedValue;
+            string email = TextBoxEmail.Text;
+            string username = TextBoxUsername.Text;
+            string password = TextBoxPassword.Text;
+            string confirmpassword = TextBoxConfirmPassword.Text;
+            string gendervalue = RadioButtonGender.SelectedValue;
             DateTime selectedDate = CalendarDateofBirth.SelectedDate;
 
-            if (email == "" || username == "" || password == "" || confirmpassword == "" || gendervalue == "")
+            Response<MsUser> response = UserController.RegisterUser(email, username, password, confirmpassword, gendervalue, selectedDate);
+            if (response.statusCode == 200)
             {
-                LabelStatus.Text = "Must be filled";
-                return;
+                LabelStatus.ForeColor = Color.Green;
+                LabelStatus.Text = response.message;
             }
-            else if (!email.Contains("@") && !email.Contains("."))
+            else
             {
-                LabelStatus.Text = "Must be Valid email Format";
-                return;
+                LabelStatus.ForeColor = Color.Red;
+                LabelStatus.Text = response.message;
             }
-            else if (username.Length < 3 || username.Length > 25)
-            {
-                LabelStatus.Text = "Must be between 3 to 25 Characters";
-                return;
-            }
-            else if (!password.All(char.IsLetterOrDigit))
-            {
-                LabelStatus.Text = "Must be alphanumeric";
-                return;
-            }
-            else if (password.Length < 8 || password.Length > 20)
-            {
-                LabelStatus.Text = "Must be 8 to 20 characters";
-                return;
-            }
-            else if (password != confirmpassword)
-            {
-                LabelStatus.Text = "Must be same as password";
-                return;
-            }
-            else if(gendervalue != "Male" && gendervalue != "Female")
-            {
-                LabelStatus.Text = "Must choice [one Male or Female]";
-                return;
-            }
-            else if(selectedDate == DateTime.MinValue)
-            {
-                LabelStatus.Text = "Must be choice date";
-                return;
-            }
-            else if(selectedDate >= new DateTime(2010,1,1))
-            {
-                LabelStatus.Text = "Must be earlier than 01-01-2010";
-                return;
-            }
-            UserRepository.createnewuser(email,username,password,gendervalue,selectedDate);
-            LabelStatus.Text = "Berhasil";
         }
-
-
 
         protected void CalendarDateofBirth_SelectionChanged1(object sender, EventArgs e)
         {

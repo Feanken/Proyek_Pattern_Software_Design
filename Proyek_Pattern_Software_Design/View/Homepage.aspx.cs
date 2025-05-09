@@ -16,22 +16,22 @@ namespace Proyek_Pattern_Software_Design.View
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["MsUser"] == null || Request.Cookies["MsUser_Cookie"] == null)
-            {
-                PanelHomePage.Visible = false;
-            }
-            else
-            {
-                if (Session["MsUser"] == null)
-                {
-                    int id = int.Parse(Request.Cookies["MsUser_Cookie"].Value);
-                    MsUser user = UserRepository.getuserid(id);
-                    Session["MsUser"] = user;
-                }
-                PanelHomePage.Visible = true;
-                MsUser sessionuser = (MsUser)Session["MsUser"];
-                Labelhello.Text = "Hello, " + sessionuser.UserName;
-            }
+            //if (Session["MsUser"] == null || Request.Cookies["MsUser_Cookie"] == null)
+            //{
+            //    PanelHomePage.Visible = false;
+            //}
+            //else
+            //{
+            //    if (Session["MsUser"] == null)
+            //    {
+            //        int id = int.Parse(Request.Cookies["MsUser_Cookie"].Value);
+            //        MsUser user = UserRepository.getuserid(id);
+            //        Session["MsUser"] = user;
+            //    }
+            //    PanelHomePage.Visible = true;
+            //    MsUser sessionuser = (MsUser)Session["MsUser"];
+            //    Labelhello.Text = "Hello, " + sessionuser.UserName;
+            //}
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)

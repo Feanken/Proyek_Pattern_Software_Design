@@ -8,7 +8,11 @@ namespace Proyek_Pattern_Software_Design.Factory
 {
     public class UserFactory
     {
-        public static MsUser createnewUser(string email, string username, string password, string gender, DateTime date)
+        public UserFactory()
+        {
+
+        }
+        public static MsUser CreateUser(string email, string username, string password, string gender, DateTime date)
         {
             MsUser user = new MsUser();
             user.UserName = username;
