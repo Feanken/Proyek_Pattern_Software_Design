@@ -13,11 +13,11 @@ namespace Proyek_Pattern_Software_Design.Controller
 	{
         UserHandler userHandler = new UserHandler();
         public UserController() { }
-        public Response<MsUser> validateLogin(string email, string pass, Boolean isRemember)
+        public Response<MsUser> validateLogin(string email, string pass)
         {
             if (email == null || pass == null)
             {
-                return new Response<MsUser>(400, "Username or Password is empty", null);
+                return new Response<MsUser>(400, "email or Password is empty", null);
             }
             MsUser loginuser = userHandler.getUser(email, pass);
             if (loginuser == null)

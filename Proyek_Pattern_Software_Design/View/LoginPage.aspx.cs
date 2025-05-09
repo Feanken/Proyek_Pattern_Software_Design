@@ -29,10 +29,10 @@ namespace Proyek_Pattern_Software_Design.View
             string pass = TextBoxPassword.Text;
             Boolean isRemember = CheckBoxCookie.Checked;
 
-            Response<MsUser> response = userController.validateLogin(email, pass, isRemember);
+            Response<MsUser> response = userController.validateLogin(email, pass);
             if (response.statusCode == 200)
             {
-                if (isRemember == null)
+                if (isRemember)
                 {
                     HttpCookie cookie = new HttpCookie("MsUser_Cookie");
                     cookie.Value = response.data.UserID.ToString();

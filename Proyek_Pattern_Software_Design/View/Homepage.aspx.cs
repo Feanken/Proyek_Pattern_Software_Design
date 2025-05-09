@@ -14,24 +14,33 @@ namespace Proyek_Pattern_Software_Design.View
 {
     public partial class Homepage : System.Web.UI.Page
     {
+        UserRepository userRepository = new UserRepository();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["MsUser"] == null || Request.Cookies["MsUser_Cookie"] == null)
-            //{
-            //    PanelHomePage.Visible = false;
-            //}
-            //else
-            //{
-            //    if (Session["MsUser"] == null)
-            //    {
-            //        int id = int.Parse(Request.Cookies["MsUser_Cookie"].Value);
-            //        MsUser user = UserRepository.getuserid(id);
-            //        Session["MsUser"] = user;
-            //    }
-            //    PanelHomePage.Visible = true;
-            //    MsUser sessionuser = (MsUser)Session["MsUser"];
-            //    Labelhello.Text = "Hello, " + sessionuser.UserName;
-            //}
+            HttpCookie cookie = Request.Cookies["MsUser_Cookie"];
+
+            if (Session["MsUser"] == null && cookie != null)
+            {
+                if (int.TryParse(cookie.Value, out int id))
+                {
+                    MsUser user = userRepository.getUserById(id);
+                    if (user != null)
+                    {
+                        Session["MsUser"] = user;
+                    }
+                }
+            }
+
+            if (Session["MsUser"] != null)
+            {
+                PanelHomePage.Visible = true;
+                MsUser sessionuser = (MsUser)Session["MsUser"];
+                Labelhello.Text = "Hello, " + sessionuser.UserName;
+            }
+            else
+            {
+                PanelHomePage.Visible = false;
+            }
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
