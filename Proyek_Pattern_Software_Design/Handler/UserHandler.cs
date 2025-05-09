@@ -22,9 +22,9 @@ namespace Proyek_Pattern_Software_Design.Handler
             MsUser newUser = UserFactory.CreateUser(email, username, password, gendervalue, selectedDate);
             repository.addUser(newUser);
         }
-        public MsUser getUser(string username, string password)
+        public MsUser getUser(string email, string password)
         {
-            return repository.getUser(username, password);
+            return repository.getUser(email, password);
         }
 
     }

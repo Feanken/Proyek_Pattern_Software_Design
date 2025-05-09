@@ -21,11 +21,16 @@ namespace Proyek_Pattern_Software_Design.Repository
             db.MsUsers.Add(user);
             db.SaveChanges();
         }
-        public MsUser getUser(string username, string password)
+        public MsUser getUser(string email, string password)
         {
             return db.MsUsers.Where(
-                u => u.UserName.Equals(username) && u.UserPassword.Equals(password)
+                u => u.UserEmail.Equals(email) && u.UserPassword.Equals(password)
                 ).FirstOrDefault();
+        }
+        public MsUser getUserById(int userID)
+        {
+            return db.MsUsers.Where(
+                u => u.UserID.Equals(userID)).FirstOrDefault();
         }
     }
 }
