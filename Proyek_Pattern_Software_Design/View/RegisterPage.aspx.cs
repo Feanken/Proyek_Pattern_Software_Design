@@ -47,19 +47,19 @@ namespace Proyek_Pattern_Software_Design.View
                 LabelStatus.Text = "Must be Valid email Format";
                 return;
             }
-            else if (username.Length < 3 && username.Length > 25)
+            else if (username.Length < 3 || username.Length > 25)
             {
                 LabelStatus.Text = "Must be between 3 to 25 Characters";
                 return;
             }
-            else if (!password.All(char.IsLetter))
+            else if (!password.All(char.IsLetterOrDigit))
             {
-                if (password.Length < 8 && password.Length > 20)
-                {
-                    LabelStatus.Text = "Must be 8 to 20 Characters";
-                    return;
-                }
                 LabelStatus.Text = "Must be alphanumeric";
+                return;
+            }
+            else if (password.Length < 8 || password.Length > 20)
+            {
+                LabelStatus.Text = "Must be 8 to 20 characters";
                 return;
             }
             else if (password != confirmpassword)
