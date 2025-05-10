@@ -10,6 +10,8 @@ namespace Proyek_Pattern_Software_Design.Handler
 	public class TransactionHandler
     {
         TransactionRepository transactionRepository = new TransactionRepository();
+        CartRepository cartRepository = new CartRepository();
+
         public TransactionHandler()
         {
         }
@@ -27,5 +29,9 @@ namespace Proyek_Pattern_Software_Design.Handler
             return transactionRepository.getTransaction();
         }
 
+        public void createTransaction(int userID, string paymentMethod)
+        {
+            transactionRepository.createTransaction(userID, paymentMethod);
+        }
     }
 }

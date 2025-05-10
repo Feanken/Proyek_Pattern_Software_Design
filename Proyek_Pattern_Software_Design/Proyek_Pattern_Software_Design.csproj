@@ -2353,6 +2353,7 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="View\AddJewel.aspx" />
+    <Content Include="View\CartPage.aspx" />
     <Content Include="View\EditJewel.aspx" />
     <Content Include="View\HandleOrder.aspx" />
     <Content Include="View\Homepage.aspx" />
@@ -2397,6 +2398,7 @@
     <Compile Include="Master\MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
+    <Compile Include="Model\CartDetailModel.cs" />
     <Compile Include="Model\JewelDetailModel.cs" />
     <Compile Include="Model\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -2451,6 +2453,13 @@
     </Compile>
     <Compile Include="View\AddJewel.aspx.designer.cs">
       <DependentUpon>AddJewel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\CartPage.aspx.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\CartPage.aspx.designer.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\EditJewel.aspx.cs">
       <DependentUpon>EditJewel.aspx</DependentUpon>

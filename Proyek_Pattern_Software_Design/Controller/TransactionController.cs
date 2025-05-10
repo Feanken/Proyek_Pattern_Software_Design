@@ -24,5 +24,10 @@ namespace Proyek_Pattern_Software_Design.Controller
         {
             return transactionHandler.getTransaction();
         }
+
+        public void createTransaction(int userID, string paymentMethod)
+        {
+            transactionHandler.createTransaction(userID, paymentMethod);
+        }
     }
 }

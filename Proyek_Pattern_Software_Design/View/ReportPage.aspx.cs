@@ -18,7 +18,6 @@ namespace Proyek_Pattern_Software_Design.View
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Authentication & Authorization
             if (Session["User"] == null && Request.Cookies["Cookie"] == null)
             {
                 Response.Redirect("~/View/Homepage.aspx");
@@ -43,28 +42,10 @@ namespace Proyek_Pattern_Software_Design.View
                 Response.Redirect("~/View/HomePage.aspx");
             }
 
-            if (!IsPostBack)
-            {
-                LoadReport();
-            }
-        }
-
-        private void LoadReport()
-        {
-            var transactions = transactionController.getTransaction();
-                //.Where(t => t.TransactionStatus == "Done")
-                //.ToList();
-
-            DataSet1 data = getData(transactions);
-
             ReportTransaction report = new ReportTransaction();
-            report.SetDataSource(data);
-            foreach (CrystalDecisions.CrystalReports.Engine.ReportDocument subreport in report.Subreports)
-            {
-                subreport.SetDataSource(data);
-            }
             CrystalReportViewer1.ReportSource = report;
-            CrystalReportViewer1.DataBind();
+            DataSet1 data = getData(transactionController.getTransaction());
+            report.SetDataSource(data);
         }
 
         private DataSet1 getData(List<TransactionHeader> transactions)
@@ -89,7 +70,6 @@ namespace Proyek_Pattern_Software_Design.View
                     drow["TransactionID"] = d.TransactionID;
                     drow["JewelID"] = d.JewelID;
                     drow["Quantity"] = d.Quantity;
-                    
                     MsJewel jewel = jewelController.getJewelByID(d.JewelID);
                     decimal price = Convert.ToDecimal(jewel.JewelPrice);
                     decimal subtotal = price * Convert.ToDecimal(d.Quantity);
@@ -99,8 +79,6 @@ namespace Proyek_Pattern_Software_Design.View
                     detailTable.Rows.Add(drow);
                 }
             }
-
-
             return dataSet;
         }
     }

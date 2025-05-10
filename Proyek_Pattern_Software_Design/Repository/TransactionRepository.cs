@@ -4,12 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace Proyek_Pattern_Software_Design.Repository
 {
     public class TransactionRepository
     {
         Database1Entities db = DatabaseConnection.getInstance().getDB();
+        CartRepository cartRepository = new CartRepository();
         public List<TransactionHeader> GetUnfinishedOrders()
         {
             return db.TransactionHeaders
@@ -28,11 +30,33 @@ namespace Proyek_Pattern_Software_Design.Repository
         }
         public List<TransactionHeader> getTransaction()
         {
-            //return db.TransactionHeaders
-            //     .Include("TransactionDetails") 
-            //     .Where(t => t.TransactionStatus == "Done")
-            //     .ToList();
-            return db.TransactionHeaders.ToList();
+            return db.TransactionHeaders
+                 .Include("TransactionDetails")
+                 .Where(t => t.TransactionStatus == "Done")
+                 .ToList();
+            
+        }
+        public void createTransaction(int userID, string paymentMethod)
+        {
+            TransactionHeader header = new TransactionHeader();
+            header.UserID = userID;
+            header.PaymentMethod = paymentMethod;
+            header.TransactionDate = DateTime.Now;
+            header.TransactionStatus = "Payment Pending";
+            db.TransactionHeaders.Add(header);
+            db.SaveChanges();
+
+            var cartItems = cartRepository.GetCart(userID);
+
+            foreach (var item in cartItems)
+            {
+                TransactionDetail detail = new TransactionDetail();
+                detail.TransactionHeader = header;
+                detail.JewelID = Convert.ToInt32(item.JewelID);
+                detail.Quantity = item.Quantity;
+                db.TransactionDetails.Add(detail);
+                db.SaveChanges();
+            }
         }
     }
 }

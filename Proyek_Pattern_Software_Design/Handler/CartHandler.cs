@@ -17,5 +17,21 @@ namespace Proyek_Pattern_Software_Design.Handler
         {
             return cartRepository.AddToCart(userID, jewelID);
         }
+        public List<CartDetailModel> GetCart(int userID)
+        {
+            return cartRepository.GetCart(userID);
+        }
+        public Cart removeCart(int id)
+        {
+            return cartRepository.removeCart(id);
+        }
+        public void updateQuantity(int userID, int jewelID, int quantity)
+        {
+            cartRepository.updateQuantity(userID, jewelID, quantity);
+        }
+        public void clearCart(int userID)
+        {
+            cartRepository.clearCart(userID);
+        }
     }
 }
