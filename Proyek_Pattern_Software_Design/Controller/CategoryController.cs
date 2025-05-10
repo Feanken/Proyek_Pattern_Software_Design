@@ -17,5 +17,9 @@ namespace Proyek_Pattern_Software_Design.Controller
         {
             return CategoryHandler.getCategoryByID(categoryID);
         }
+        public List<MsCategory> getAllCategories()
+        {
+            return CategoryHandler.getAllCategories();
+        }
     }
 }

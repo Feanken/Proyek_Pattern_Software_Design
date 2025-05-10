@@ -18,5 +18,9 @@ namespace Proyek_Pattern_Software_Design.Repository
         {
             return db.MsCategories.Find(categoryID);
         }
+        public List<MsCategory> getAllCategories()
+        {
+            return db.MsCategories.ToList();
+        }
     }
 }

@@ -25,5 +25,17 @@ namespace Proyek_Pattern_Software_Design.Controller
         {
             return jewelHandler.getJewelDetail(jewelID);
         }
+        public MsJewel removeJewel(int jewelID)
+        {
+            return jewelHandler.removeJewel(jewelID);
+        }
+        public bool updateJewel(int jewelID, string name,int categoryID, int brandID, int price, int year)
+        {
+            return jewelHandler.updateJewel(jewelID, name, categoryID, brandID, price, year);
+        }
+        public bool addJewel(string name, int categoryID, int brandID, int price, int year)
+        {
+            return jewelHandler.addJewel(name, categoryID, brandID, price, year);
+        }
     }
 }

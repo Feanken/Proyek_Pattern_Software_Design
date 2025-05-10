@@ -17,5 +17,9 @@ namespace Proyek_Pattern_Software_Design.Controller
         {
             return brandHandler.getBrandByID(brandID);
         }
+        public List<MsBrand> getAllBrands()
+        {
+            return brandHandler.getAllBrands();
+        }
     }
 }
