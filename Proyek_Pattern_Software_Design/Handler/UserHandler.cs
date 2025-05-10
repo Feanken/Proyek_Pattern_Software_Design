@@ -26,6 +26,9 @@ namespace Proyek_Pattern_Software_Design.Handler
         {
             return repository.getUser(email, password);
         }
-
+        public MsUser getUserByEmail(string email)
+        {
+            return repository.getUserByEmail(email);
+        }
     }
 }

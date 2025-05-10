@@ -32,5 +32,9 @@ namespace Proyek_Pattern_Software_Design.Repository
             return db.MsUsers.Where(
                 u => u.UserID.Equals(userID)).FirstOrDefault();
         }
+        public MsUser getUserByEmail(string email)
+        {
+            return db.MsUsers.Where(u => u.UserEmail.Equals(email)).FirstOrDefault();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Lifetime;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,6 +14,7 @@ namespace Proyek_Pattern_Software_Design.Master
         {
             if (Session["MsUser"] == null)
             {
+                ButtonHome.Visible = true;
                 ButtonRegister.Visible = true;
                 ButtonLogin.Visible = true;
                 ButtonCart.Visible = false;
@@ -24,8 +26,9 @@ namespace Proyek_Pattern_Software_Design.Master
                 ButtonReports.Visible = false;
                 ButtonHandleOrders.Visible = false;
             }
-            else
+            else if (Session["MsUser"] != null)
             {
+                ButtonHome.Visible = true;
                 ButtonRegister.Visible = false;
                 ButtonLogin.Visible = false;
                 ButtonCart.Visible = true;
