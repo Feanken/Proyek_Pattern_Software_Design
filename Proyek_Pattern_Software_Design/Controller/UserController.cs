@@ -33,7 +33,7 @@ namespace Proyek_Pattern_Software_Design.Controller
             {
                 return new Response<MsUser>(400, "Must be filled", null);
             }
-            else if (!email.Contains("@") && !email.Contains("."))
+            else if (!email.Contains("@") || !email.Contains(".") || email.Last() == '.')
             {
                 return new Response<MsUser>(400, "Must be a valid email format", null);
             }
@@ -53,7 +53,7 @@ namespace Proyek_Pattern_Software_Design.Controller
             {
                 return new Response<MsUser>(400, "Password and confirmation must match", null);
             }
-            if (gendervalue != "Male" && gendervalue != "Female")
+            else if (gendervalue != "Male" && gendervalue != "Female")
             {
                 return new Response<MsUser>(400, "Gender must be either Male or Female", null);
             }
@@ -67,11 +67,22 @@ namespace Proyek_Pattern_Software_Design.Controller
             {
                 return new Response<MsUser>(400, "Date must be earlier than 01-01-2010", null);
             }
-            MsUser user = userHandler.getuserByUsername(username);
-            if (user == null)
+
+            MsUser duplicateUsername = userHandler.getuserByUsername(username);
+            MsUser duplicateEmail = userHandler.getUserByEmail(email);
+            if (duplicateEmail == null && duplicateUsername == null)
             {
                 userHandler.handleUserRegister(email, username, password, confirmpassword, gendervalue, selectedDate);
                 return new Response<MsUser>(200, "User Successfully Register", null);
+            }
+            else if (duplicateEmail != null)
+            {
+                return new Response<MsUser>(400, "Email already exist", null);
+            }
+            else if (duplicateUsername != null)
+            {
+                return new Response<MsUser>(400, "Username already exist", null);
+
             }
             return new Response<MsUser>(400, "Username already exist", null);
         }
