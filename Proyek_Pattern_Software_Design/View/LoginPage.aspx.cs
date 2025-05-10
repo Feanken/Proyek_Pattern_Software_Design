@@ -17,11 +17,31 @@ namespace Proyek_Pattern_Software_Design.View
         UserController userController = new UserController();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["MsUser"] != null || Request.Cookies["MsUser_Cookie"] != null)
+            if (Session["User"] != null)
             {
                 Response.Redirect("~/View/Homepage.aspx");
             }
+
+            HttpCookie cookie = Request.Cookies["Cookie"];
+            if (cookie != null)
+            {
+                int userID = Convert.ToInt32(cookie.Value);
+                UserController controller = new UserController();
+                MsUser user = controller.getUserByID(userID);
+
+                if (user != null)
+                {
+                    Session["User"] = user;
+                    Session["Role"] = user.UserRole;
+                    Response.Redirect("~/View/Homepage.aspx");
+                }
+            }
+            if (!IsPostBack)
+            {
+                
+            }
         }
+
 
         protected void ButtonLogin_Click(object sender, EventArgs e)
         {
@@ -34,12 +54,14 @@ namespace Proyek_Pattern_Software_Design.View
             {
                 if (isRemember)
                 {
-                    HttpCookie cookie = new HttpCookie("MsUser_Cookie");
+                    HttpCookie cookie = new HttpCookie("Cookie");
                     cookie.Value = response.data.UserID.ToString();
                     cookie.Expires = DateTime.Now.AddDays(1);
                     Response.Cookies.Add(cookie);
                 }
+
                 Session["User"] = response.data;
+                Session["Role"] = response.data.UserRole;
                 Response.Redirect("~/view/homepage.aspx");
 
                 LabelStatus.ForeColor = Color.Green;

@@ -86,5 +86,9 @@ namespace Proyek_Pattern_Software_Design.Controller
             }
             return new Response<MsUser>(400, "Username already exist", null);
         }
+        public MsUser getUserByID(int userID)
+        {
+            return userHandler.getUserByID(userID);
+        }
     }
 }

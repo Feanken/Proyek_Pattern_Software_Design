@@ -30,5 +30,9 @@ namespace Proyek_Pattern_Software_Design.Handler
         {
             return repository.getUserByEmail(email);
         }
+        public MsUser getUserByID(int ID)
+        {
+            return repository.getUserById(ID);
+        }
     }
 }

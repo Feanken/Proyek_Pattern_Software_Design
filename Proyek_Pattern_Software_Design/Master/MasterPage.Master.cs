@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proyek_Pattern_Software_Design.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Lifetime;
@@ -12,34 +13,40 @@ namespace Proyek_Pattern_Software_Design.Master
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["MsUser"] == null)
+            setButtonVisibility();
+            if (Session["User"] == null)
             {
                 ButtonHome.Visible = true;
-                ButtonRegister.Visible = true;
                 ButtonLogin.Visible = true;
-                ButtonCart.Visible = false;
-                ButtonMyOrders.Visible = false;
-                ButtonProfile.Visible = false;
-                ButtonAddJewel.Visible = false;
-                ButtonLogOut.Visible = false;
-                ButtonAddJewel.Visible = false;
-                ButtonReports.Visible = false;
-                ButtonHandleOrders.Visible = false;
+                ButtonRegister.Visible = true;
             }
-            else if (Session["MsUser"] != null)
+            else if (Session["User"] != null && Session["Role"].ToString() == "Customer")
+            {
+               ButtonHome.Visible = true;
+               ButtonCart.Visible = true;
+               ButtonMyOrders.Visible = true;
+               ButtonProfile.Visible = true;
+               ButtonLogOut.Visible = true;
+            }
+            else if (Session["User"] != null && Session["Role"].ToString() == "Admin")
             {
                 ButtonHome.Visible = true;
-                ButtonRegister.Visible = false;
-                ButtonLogin.Visible = false;
-                ButtonCart.Visible = true;
-                ButtonMyOrders.Visible = true;
+                ButtonAddJewel.Visible = true;
+                ButtonReports.Visible = true;
+                ButtonHandleOrders.Visible = true;
                 ButtonProfile.Visible = true;
-                ButtonAddJewel.Visible = false;
                 ButtonLogOut.Visible = true;
-                ButtonAddJewel.Visible = false;
-                ButtonReports.Visible = false;
-                ButtonHandleOrders.Visible = false;
             }
+            if(Session["User"] != null)
+            {
+                MsUser sessionuser = (MsUser)Session["User"];
+                Labelhello.Text = "Hello, " + sessionuser.UserName;
+            }
+            else
+            {
+                Labelhello.Text = "";
+            }
+
         }
 
         protected void ButtonHome_Click(object sender, EventArgs e)
@@ -71,11 +78,25 @@ namespace Proyek_Pattern_Software_Design.Master
         {
 
         }
-
+        protected void setButtonVisibility()
+        {
+            ButtonHome.Visible = false;
+            ButtonRegister.Visible = false;
+            ButtonLogin.Visible = false;
+            ButtonCart.Visible = false;
+            ButtonMyOrders.Visible = false;
+            ButtonProfile.Visible = false;
+            ButtonAddJewel.Visible = false;
+            ButtonLogOut.Visible = false;
+            ButtonAddJewel.Visible = false;
+            ButtonReports.Visible = false;
+            ButtonHandleOrders.Visible = false;
+        }
         protected void ButtonLogOut_Click(object sender, EventArgs e)
         {
-            Session.Remove("MsUser");
-            HttpCookie cookie = Request.Cookies["MsUser_Cookie"];
+            Session.Remove("User");
+            Session.Remove("Role");
+            HttpCookie cookie = Request.Cookies["Cookie"];
             if (cookie != null)
             {
                 cookie.Expires = DateTime.Now.AddDays(-2);
