@@ -9,17 +9,20 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Button ID="ButtonHome" runat="server" Text="Home" OnClick="ButtonHome_Click"/>
-            <asp:Button ID="ButtonLogin" runat="server" Text="Login" OnClick="ButtonLogin_Click"/>
-            <asp:Button ID="ButtonRegister" runat="server" Text="Register" OnClick="ButtonRegister_Click"/>
-            <asp:Button ID="ButtonCart" runat="server" Text="Cart" OnClick="ButtonCart_Click"/>
-            <asp:Button ID="ButtonMyOrders" runat="server" Text="My Orders" OnClick="ButtonMyOrders_Click1"/>
-            <asp:Button ID="ButtonAddJewel" runat="server" Text="Add Jewel" OnClick="ButtonAddJewel_Click"/>
-            <asp:Button ID="ButtonReports" runat="server" Text="Reports" OnClick="ButtonReports_Click"/>
-            <asp:Button ID="ButtonHandleOrders" runat="server" Text="Handle Orders" OnClick="ButtonHandleOrders_Click"/>
-            <asp:Button ID="ButtonProfile" runat="server" Text="Profile" OnClick="ButtonProfile_Click"/>
-            <asp:Button ID="ButtonLogOut" runat="server" Text="Logout" OnClick="ButtonLogOut_Click"/>
+            <asp:Button ID="ButtonHome" runat="server" Text="Home" OnClick="ButtonHome_Click" />
+            <asp:Button ID="ButtonLogin" runat="server" Text="Login" OnClick="ButtonLogin_Click" />
+            <asp:Button ID="ButtonRegister" runat="server" Text="Register" OnClick="ButtonRegister_Click" />
+            <asp:Button ID="ButtonCart" runat="server" Text="Cart" OnClick="ButtonCart_Click" />
+            <asp:Button ID="ButtonMyOrders" runat="server" Text="My Orders" OnClick="ButtonMyOrders_Click1" />
+            <asp:Button ID="ButtonAddJewel" runat="server" Text="Add Jewel" OnClick="ButtonAddJewel_Click" />
+            <asp:Button ID="ButtonReports" runat="server" Text="Reports" OnClick="ButtonReports_Click" />
+            <asp:Button ID="ButtonHandleOrders" runat="server" Text="Handle Orders" OnClick="ButtonHandleOrders_Click" />
+            <asp:Button ID="ButtonProfile" runat="server" Text="Profile" OnClick="ButtonProfile_Click" />
+            <asp:Button ID="ButtonLogOut" runat="server" Text="Logout" OnClick="ButtonLogOut_Click" />
 
+        </div>
+        <div>
+            <asp:Label ID="Labelhello" runat="server" Text=""></asp:Label>
         </div>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

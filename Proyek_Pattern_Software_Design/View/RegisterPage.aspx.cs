@@ -17,16 +17,34 @@ namespace Proyek_Pattern_Software_Design.View
         UserController UserController = new UserController();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["MsUser"] != null || Request.Cookies["MsUser_Cookie"] != null)
+
+            if (Session["User"] != null)
             {
                 Response.Redirect("~/View/HomePage.aspx");
+            }
+
+            HttpCookie cookie = Request.Cookies["Cookie"];
+            if (cookie != null)
+            {
+                int userID = Convert.ToInt32(cookie.Value);
+                UserController controller = new UserController();
+                MsUser user = controller.getUserByID(userID);
+
+                if (user != null)
+                {
+                    Session["User"] = user;
+                    Session["Role"] = user.UserRole;
+                    Response.Redirect("~/View/HomePage.aspx");
+                }
             }
             if (!IsPostBack)
             {
                 CalendarDateofBirth.TodaysDate = new DateTime(2010, 1, 1);
                 CalendarDateofBirth.SelectedDate = CalendarDateofBirth.TodaysDate;
             }
+
         }
+
 
         protected void LinkButtonLogin_Click(object sender, EventArgs e)
         {

@@ -7,128 +7,119 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Proyek_Pattern_Software_Design.Master
+namespace Proyek_Pattern_Software_Design.View
 {
 
 
-    public partial class MasterPage
+    public partial class JewelsDetail
     {
 
         /// <summary>
-        /// form1 control.
+        /// PanelDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Panel PanelDetail;
 
         /// <summary>
-        /// ButtonHome control.
+        /// LabelName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonHome;
+        protected global::System.Web.UI.WebControls.Label LabelName;
 
         /// <summary>
-        /// ButtonLogin control.
+        /// LabelCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonLogin;
+        protected global::System.Web.UI.WebControls.Label LabelCategory;
 
         /// <summary>
-        /// ButtonRegister control.
+        /// LabelBrand control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonRegister;
+        protected global::System.Web.UI.WebControls.Label LabelBrand;
 
         /// <summary>
-        /// ButtonCart control.
+        /// LabelCountry control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonCart;
+        protected global::System.Web.UI.WebControls.Label LabelCountry;
 
         /// <summary>
-        /// ButtonMyOrders control.
+        /// LabelClass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonMyOrders;
+        protected global::System.Web.UI.WebControls.Label LabelClass;
 
         /// <summary>
-        /// ButtonAddJewel control.
+        /// LabelPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAddJewel;
+        protected global::System.Web.UI.WebControls.Label LabelPrice;
 
         /// <summary>
-        /// ButtonReports control.
+        /// LabelYear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonReports;
+        protected global::System.Web.UI.WebControls.Label LabelYear;
 
         /// <summary>
-        /// ButtonHandleOrders control.
+        /// BtnAddToCart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonHandleOrders;
+        protected global::System.Web.UI.WebControls.Button BtnAddToCart;
 
         /// <summary>
-        /// ButtonProfile control.
+        /// BtnEdit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonProfile;
+        protected global::System.Web.UI.WebControls.Button BtnEdit;
 
         /// <summary>
-        /// ButtonLogOut control.
+        /// BtnDelete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonLogOut;
+        protected global::System.Web.UI.WebControls.Button BtnDelete;
 
         /// <summary>
-        /// Labelhello control.
+        /// LabelError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Labelhello;
-
-        /// <summary>
-        /// ContentPlaceHolder1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.Label LabelError;
     }
 }

@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using Proyek_Pattern_Software_Design.Factory;
 using Proyek_Pattern_Software_Design.Repository;
 using Proyek_Pattern_Software_Design.Model;
+using Proyek_Pattern_Software_Design.Controller;
+using System.Runtime.Remoting.Lifetime;
 
 
 
@@ -14,38 +16,45 @@ namespace Proyek_Pattern_Software_Design.View
 {
     public partial class Homepage : System.Web.UI.Page
     {
-        UserRepository userRepository = new UserRepository();
+        UserController controller = new UserController();
+        JewelController jewelController = new JewelController();
         protected void Page_Load(object sender, EventArgs e)
         {
-            HttpCookie cookie = Request.Cookies["MsUser_Cookie"];
-
-            if (Session["MsUser"] == null && cookie != null)
+            if (!IsPostBack)
             {
-                if (int.TryParse(cookie.Value, out int id))
+                if (Session["User"] == null)
                 {
-                    MsUser user = userRepository.getUserById(id);
-                    if (user != null)
+                    HttpCookie cookie = Request.Cookies["Cookie"];
+                    if (cookie != null)
                     {
-                        Session["MsUser"] = user;
+                        int userID = Convert.ToInt32(cookie.Value);
+                        MsUser user = controller.getUserByID(userID);
+                        if (user != null)
+                        {
+                            Session["User"] = user;
+                            Session["Role"] = user.UserRole;
+                        }
                     }
                 }
+
+                PanelHomePage.Visible = Session["User"] != null;
+                GridView1.DataSource = jewelController.getAllJewel();
+                GridView1.DataBind();
             }
 
-            if (Session["MsUser"] != null)
-            {
-                PanelHomePage.Visible = true;
-                MsUser sessionuser = (MsUser)Session["MsUser"];
-                Labelhello.Text = "Hello, " + sessionuser.UserName;
-            }
-            else
-            {
-                PanelHomePage.Visible = false;
-            }
         }
-
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        protected void GridView1_SelectedIndexChanged1(object sender, EventArgs e)
         {
 
+        }
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "ViewDetail") 
+            {
+                int jewelID = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("~/View/JewelsDetail.aspx?jewelID=" + jewelID);
+            }
         }
     }
 }
