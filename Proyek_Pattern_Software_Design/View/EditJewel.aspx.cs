@@ -17,7 +17,7 @@ namespace Proyek_Pattern_Software_Design.View
         JewelController jewelController = new JewelController();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["User"] == null)
+            if (Session["User"] == null && Request.Cookies["Cookie"] == null)
             {
                 Response.Redirect("~/View/Homepage.aspx");
             }
@@ -35,6 +35,13 @@ namespace Proyek_Pattern_Software_Design.View
                     Session["Role"] = user.UserRole;
                 }
             }
+            var role = Session["Role"];
+            if (role == null || role.ToString() != "Admin")
+            {
+                Response.Redirect("~/View/HomePage.aspx");
+            }
+
+
             if (!IsPostBack)
             {
                 string idParam = Request.QueryString["jewelID"];

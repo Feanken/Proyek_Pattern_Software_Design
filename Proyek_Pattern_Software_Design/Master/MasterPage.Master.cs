@@ -107,7 +107,7 @@ namespace Proyek_Pattern_Software_Design.Master
 
         protected void ButtonAddJewel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~View/AddJewel.aspx");
+            Response.Redirect("~/View/AddJewel.aspx");
         }
 
         protected void ButtonReports_Click(object sender, EventArgs e)
@@ -117,7 +117,7 @@ namespace Proyek_Pattern_Software_Design.Master
 
         protected void ButtonHandleOrders_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/View/HandleOrders.aspx");
+            Response.Redirect("~/View/HandleOrder.aspx");
         }
     }
 }
