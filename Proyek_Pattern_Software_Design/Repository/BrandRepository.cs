@@ -17,5 +17,9 @@ namespace Proyek_Pattern_Software_Design.Repository
         {
             return db.MsBrands.Find(brandID);
         }
+        public List<MsBrand> getAllBrands()
+        {
+            return db.MsBrands.ToList();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Proyek_Pattern_Software_Design.Connection;
 using Proyek_Pattern_Software_Design.Controller;
+using Proyek_Pattern_Software_Design.Factory;
 using Proyek_Pattern_Software_Design.Model;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Proyek_Pattern_Software_Design.Repository
         Database1Entities db = DatabaseConnection.getInstance().getDB();
         CategoryController categoryController = new CategoryController();
         BrandController brandController = new BrandController();
+        JewelFactory jewelFactory = new JewelFactory();
         public JewelRepository()
         {
         }
@@ -39,6 +41,45 @@ namespace Proyek_Pattern_Software_Design.Repository
                 Price = Convert.ToInt32(jewel.JewelPrice),
                 ReleaseYear = Convert.ToInt32(jewel.JewelReleaseYear),
             };
+        }
+
+        public MsJewel removeJewel(int jewelID)
+        {
+            MsJewel jewel = db.MsJewels.Find(jewelID);
+
+            if (jewel != null)
+            {
+                var relatedCarts = db.Carts.Where(c => c.JewelID == jewelID).ToList();
+                db.MsJewels.Remove(jewel);
+                db.SaveChanges();
+            }
+
+            return jewel;
+        }
+        public bool updateJewel(int jewelID, string name, int categoryID, int brandID, int price, int year)
+        {
+            MsJewel jewel = db.MsJewels.Find(jewelID);
+            if (jewel != null)
+            {
+                jewel.JewelName = name;
+                jewel.CategoryID = categoryID;
+                jewel.BrandID = brandID;
+                jewel.JewelPrice = price;
+                jewel.JewelReleaseYear = year;
+                db.SaveChanges();
+            }
+            else
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool addJewel(string name, int categoryID, int brandID, int price, int year)
+        {
+            MsJewel jewel = jewelFactory.createJewel(name, categoryID, brandID, price, year);
+            db.MsJewels.Add(jewel);
+            db.SaveChanges();
+            return true;
         }
     }
 }

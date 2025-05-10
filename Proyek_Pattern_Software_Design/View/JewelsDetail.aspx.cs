@@ -12,6 +12,7 @@ namespace Proyek_Pattern_Software_Design.View
 	public partial class JewelsDetail : System.Web.UI.Page
 	{
         private static int jewelID;
+        CartController cartController = new CartController();
         protected void Page_Load(object sender, EventArgs e)
 		{
             JewelController controller = new JewelController();
@@ -53,7 +54,7 @@ namespace Proyek_Pattern_Software_Design.View
                 LabelBrand.Text = jewel.BrandName;
                 LabelCountry.Text = jewel.Country;
                 LabelClass.Text = jewel.Class;
-                LabelPrice.Text = "Rp " + jewel.Price.ToString();
+                LabelPrice.Text = "$ " + jewel.Price.ToString("N0");
                 LabelYear.Text = jewel.ReleaseYear.ToString();
 
                 PanelDetail.Visible = true;
@@ -77,13 +78,12 @@ namespace Proyek_Pattern_Software_Design.View
 
         protected void BtnAddToCart_Click(object sender, EventArgs e)
         {
-            //MsUser user = (MsUser)Session["User"];
-            //if (user != null)
-            //{
-            //    JewelController jc = new JewelController();
-            //    jc.AddToCart(user.UserID, jewelID);
-            //    Response.Redirect("~/View/Cart.aspx");
-            //}
+            MsUser user = (MsUser)Session["User"];
+            if (user != null)
+            {
+                cartController.AddToCart(user.UserID, jewelID);
+                Response.Redirect("~/View/Cart.aspx");
+            }
         }
 
         protected void BtnEdit_Click(object sender, EventArgs e)
@@ -93,9 +93,9 @@ namespace Proyek_Pattern_Software_Design.View
 
         protected void BtnDelete_Click(object sender, EventArgs e)
         {
-            //JewelController jc = new JewelController();
-            //jc.DeleteJewel(jewelID);
-            //Response.Redirect("~/View/HomePage.aspx");
+            JewelController controller = new JewelController();
+            controller.removeJewel(jewelID);
+            Response.Redirect("~/View/HomePage.aspx");
         }
     }
 }
