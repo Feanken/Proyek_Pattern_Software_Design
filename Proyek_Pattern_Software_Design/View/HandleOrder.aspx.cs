@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Proyek_Pattern_Software_Design.Controller;
+using Proyek_Pattern_Software_Design.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.DynamicData.ModelProviders;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -9,8 +12,23 @@ namespace Proyek_Pattern_Software_Design.View
 {
 	public partial class HandleOrder : System.Web.UI.Page
 	{
+        TransactionController transactionController = new TransactionController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            string eventTarget = Request["__EVENTTARGET"];
+            string eventArgument = Request["__EVENTARGUMENT"];
+
+            if (eventTarget == "UpdateStatus")
+            {
+                string[] args = eventArgument.Split(',');
+                int transactionID = int.Parse(args[0]);
+                string newStatus = args[1];
+
+                bool updated = transactionController.UpdateTransactionStatus(transactionID, newStatus);
+                LabelMessage.Text = updated ? "Status updated." : "Failed to update.";
+                LoadOrders();
+            }
+
             if (!IsPostBack)
             {
                 LoadOrders();
@@ -19,25 +37,59 @@ namespace Proyek_Pattern_Software_Design.View
 
         private void LoadOrders()
         {
-            var orders = transactionController.getUnfinishedTransactions();
-            GVOrders.DataSource = orders;
-            GVOrders.DataBind();
+            List<TransactionHeader> orders = transactionController.getAllTransactions();
+            GridOrders.DataSource = orders;
+            GridOrders.DataBind();
+        }
+        protected override void RaisePostBackEvent(IPostBackEventHandler sourceControl, string eventArgument)
+        {
+            base.RaisePostBackEvent(sourceControl, eventArgument);
         }
 
-        protected string GetActionText(string status)
+        protected void GridOrders_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            switch (status)
+            if (e.CommandName == "UpdateStatus")
             {
-                case "Payment Pending": return "Confirm Payment";
-                case "Shipment Pending": return "Ship Package";
-                case "Arrived": return "Waiting for user confirmation...";
-                default: return "";
+                string[] args = e.CommandArgument.ToString().Split(',');
+                int transactionID = int.Parse(args[0]);
+                string newStatus = args[1];
+
+                bool updated = transactionController.UpdateTransactionStatus(transactionID, newStatus);
+                LabelMessage.Text = updated ? "Status updated." : "Failed to update.";
+                LoadOrders();
             }
         }
 
-        protected bool GetActionEnabled(string status)
+        protected void GridOrders_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            return status != "Arrived";
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var data = (TransactionHeader)e.Row.DataItem;
+
+                var btnAction = (Button)e.Row.FindControl("btnAction");
+                var lblWaiting = (Label)e.Row.FindControl("lblWaiting");
+
+                if (data.TransactionStatus == "Payment Pending")
+                {
+                    btnAction.Text = "Confirm Payment";
+                    btnAction.CommandArgument = $"{data.TransactionID},Shipment Pending";
+                }
+                else if (data.TransactionStatus == "Shipment Pending")
+                {
+                    btnAction.Text = "Ship Package";
+                    btnAction.CommandArgument = $"{data.TransactionID},Arrived";
+                }
+                else if (data.TransactionStatus == "Arrived")
+                {
+                    btnAction.Visible = false;
+                    lblWaiting.Visible = true;
+                }
+                else
+                {
+                    btnAction.Visible = false;
+                }
+            }
         }
+
     }
 }

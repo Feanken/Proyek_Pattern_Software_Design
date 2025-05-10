@@ -15,12 +15,21 @@ namespace Proyek_Pattern_Software_Design.View
     {
 
         /// <summary>
-        /// GVOrders control.
+        /// GridOrders control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GVOrders;
+        protected global::System.Web.UI.WebControls.GridView GridOrders;
+
+        /// <summary>
+        /// LabelMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelMessage;
     }
 }

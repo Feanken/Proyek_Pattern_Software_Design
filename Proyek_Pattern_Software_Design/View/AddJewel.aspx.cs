@@ -16,6 +16,24 @@ namespace Proyek_Pattern_Software_Design.View
         JewelController jewelController = new JewelController();
         protected void Page_Load(object sender, EventArgs e)
 		{
+            if (Session["User"] == null && Request.Cookies["Cookie"] == null)
+            {
+                Response.Redirect("~/View/Homepage.aspx");
+            }
+
+            HttpCookie cookie = Request.Cookies["Cookie"];
+            if (cookie != null)
+            {
+                int userID = Convert.ToInt32(cookie.Value);
+                UserController controller = new UserController();
+                MsUser user = controller.getUserByID(userID);
+
+                if (user != null)
+                {
+                    Session["User"] = user;
+                    Session["Role"] = user.UserRole;
+                }
+            }
             var role = Session["Role"];
             if (role == null || role.ToString() != "Admin")
             {
