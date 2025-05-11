@@ -31,7 +31,7 @@
               <xs:element name="TransactionDate" msprop:Generator_ColumnPropNameInTable="TransactionDateColumn" msprop:Generator_ColumnPropNameInRow="TransactionDate" msprop:Generator_UserColumnName="TransactionDate" msprop:Generator_ColumnVarNameInTable="columnTransactionDate" type="xs:string" minOccurs="0" />
               <xs:element name="PaymentMethod" msprop:Generator_ColumnPropNameInTable="PaymentMethodColumn" msprop:Generator_ColumnPropNameInRow="PaymentMethod" msprop:Generator_UserColumnName="PaymentMethod" msprop:Generator_ColumnVarNameInTable="columnPaymentMethod" type="xs:string" minOccurs="0" />
               <xs:element name="TransactionStatus" msprop:Generator_ColumnPropNameInTable="TransactionStatusColumn" msprop:Generator_ColumnPropNameInRow="TransactionStatus" msprop:Generator_UserColumnName="TransactionStatus" msprop:Generator_ColumnVarNameInTable="columnTransactionStatus" type="xs:string" minOccurs="0" />
-              <xs:element name="Subtotal" msprop:Generator_ColumnPropNameInRow="Subtotal" msprop:Generator_ColumnPropNameInTable="SubtotalColumn" msprop:Generator_ColumnVarNameInTable="columnSubtotal" msprop:Generator_UserColumnName="Subtotal" type="xs:string" minOccurs="0" />
+              <xs:element name="Subtotal" msprop:Generator_ColumnPropNameInRow="Subtotal" msprop:Generator_ColumnPropNameInTable="SubtotalColumn" msprop:Generator_ColumnVarNameInTable="columnSubtotal" msprop:Generator_UserColumnName="Subtotal" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

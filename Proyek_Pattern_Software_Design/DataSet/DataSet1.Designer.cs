@@ -757,7 +757,7 @@ namespace Proyek_Pattern_Software_Design.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public TransactionHeaderRow AddTransactionHeaderRow(string TransactionID, string UserID, string TransactionDate, string PaymentMethod, string TransactionStatus, string Subtotal) {
+            public TransactionHeaderRow AddTransactionHeaderRow(string TransactionID, string UserID, string TransactionDate, string PaymentMethod, string TransactionStatus, decimal Subtotal) {
                 TransactionHeaderRow rowTransactionHeaderRow = ((TransactionHeaderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         TransactionID,
@@ -809,7 +809,7 @@ namespace Proyek_Pattern_Software_Design.DataSet {
                 base.Columns.Add(this.columnPaymentMethod);
                 this.columnTransactionStatus = new global::System.Data.DataColumn("TransactionStatus", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTransactionStatus);
-                this.columnSubtotal = new global::System.Data.DataColumn("Subtotal", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnSubtotal = new global::System.Data.DataColumn("Subtotal", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSubtotal);
             }
             
@@ -1199,10 +1199,10 @@ namespace Proyek_Pattern_Software_Design.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Subtotal {
+            public decimal Subtotal {
                 get {
                     try {
-                        return ((string)(this[this.tableTransactionHeader.SubtotalColumn]));
+                        return ((decimal)(this[this.tableTransactionHeader.SubtotalColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Subtotal\' in table \'TransactionHeader\' is DBNull.", e);
