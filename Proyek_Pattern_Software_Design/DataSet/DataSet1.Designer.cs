@@ -637,6 +637,8 @@ namespace Proyek_Pattern_Software_Design.DataSet {
             
             private global::System.Data.DataColumn columnTransactionStatus;
             
+            private global::System.Data.DataColumn columnSubtotal;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public TransactionHeaderDataTable() {
@@ -712,6 +714,14 @@ namespace Proyek_Pattern_Software_Design.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn SubtotalColumn {
+                get {
+                    return this.columnSubtotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -747,14 +757,15 @@ namespace Proyek_Pattern_Software_Design.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public TransactionHeaderRow AddTransactionHeaderRow(string TransactionID, string UserID, string TransactionDate, string PaymentMethod, string TransactionStatus) {
+            public TransactionHeaderRow AddTransactionHeaderRow(string TransactionID, string UserID, string TransactionDate, string PaymentMethod, string TransactionStatus, string Subtotal) {
                 TransactionHeaderRow rowTransactionHeaderRow = ((TransactionHeaderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         TransactionID,
                         UserID,
                         TransactionDate,
                         PaymentMethod,
-                        TransactionStatus};
+                        TransactionStatus,
+                        Subtotal};
                 rowTransactionHeaderRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTransactionHeaderRow);
                 return rowTransactionHeaderRow;
@@ -782,6 +793,7 @@ namespace Proyek_Pattern_Software_Design.DataSet {
                 this.columnTransactionDate = base.Columns["TransactionDate"];
                 this.columnPaymentMethod = base.Columns["PaymentMethod"];
                 this.columnTransactionStatus = base.Columns["TransactionStatus"];
+                this.columnSubtotal = base.Columns["Subtotal"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -797,6 +809,8 @@ namespace Proyek_Pattern_Software_Design.DataSet {
                 base.Columns.Add(this.columnPaymentMethod);
                 this.columnTransactionStatus = new global::System.Data.DataColumn("TransactionStatus", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTransactionStatus);
+                this.columnSubtotal = new global::System.Data.DataColumn("Subtotal", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubtotal);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1185,6 +1199,22 @@ namespace Proyek_Pattern_Software_Design.DataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Subtotal {
+                get {
+                    try {
+                        return ((string)(this[this.tableTransactionHeader.SubtotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subtotal\' in table \'TransactionHeader\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTransactionHeader.SubtotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsTransactionIDNull() {
                 return this.IsNull(this.tableTransactionHeader.TransactionIDColumn);
             }
@@ -1241,6 +1271,18 @@ namespace Proyek_Pattern_Software_Design.DataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetTransactionStatusNull() {
                 this[this.tableTransactionHeader.TransactionStatusColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsSubtotalNull() {
+                return this.IsNull(this.tableTransactionHeader.SubtotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetSubtotalNull() {
+                this[this.tableTransactionHeader.SubtotalColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

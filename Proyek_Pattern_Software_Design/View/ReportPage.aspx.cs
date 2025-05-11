@@ -53,7 +53,7 @@ namespace Proyek_Pattern_Software_Design.View
             DataSet1 dataSet = new DataSet1();
             var headerTable = dataSet.TransactionHeader;
             var detailTable = dataSet.TransactionDetail;
-
+            decimal totalAll = 0;
             foreach (Proyek_Pattern_Software_Design.Model.TransactionHeader t in transactions)
             {
                 var hrow = headerTable.NewRow();
@@ -73,11 +73,12 @@ namespace Proyek_Pattern_Software_Design.View
                     MsJewel jewel = jewelController.getJewelByID(d.JewelID);
                     decimal price = Convert.ToDecimal(jewel.JewelPrice);
                     decimal subtotal = price * Convert.ToDecimal(d.Quantity);
-
+                    totalAll += subtotal;
                     drow["Price"] = price;
                     drow["Subtotal"] = subtotal;
                     detailTable.Rows.Add(drow);
                 }
+                hrow["Subtotal"] = totalAll;
             }
             return dataSet;
         }
