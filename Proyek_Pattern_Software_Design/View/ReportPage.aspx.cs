@@ -56,7 +56,7 @@ namespace Proyek_Pattern_Software_Design.View
             decimal totalAll = 0;
             foreach (Proyek_Pattern_Software_Design.Model.TransactionHeader t in transactions)
             {
-                var hrow = headerTable.NewRow();
+                var hrow = headerTable.NewRow();    
                 hrow["TransactionID"] = t.TransactionID;
                 hrow["UserID"] = t.UserID;
                 hrow["TransactionDate"] = t.TransactionDate;
