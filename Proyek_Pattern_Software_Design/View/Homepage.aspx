@@ -111,7 +111,7 @@
                 <Columns>
                     <asp:BoundField DataField="JewelID" HeaderText="Jewel ID" SortExpression="JewelID" ItemStyle-CssClass="id-column" />
                     <asp:BoundField DataField="JewelName" HeaderText="Jewel Name" SortExpression="JewelName" ItemStyle-CssClass="name-column" />
-                    <asp:BoundField DataField="JewelPrice" HeaderText="Price" SortExpression="JewelPrice" DataFormatString="{0:C}" ItemStyle-CssClass="price-column" />
+                    <asp:BoundField DataField="JewelPrice" HeaderText="Price" SortExpression="JewelPrice" DataFormatString="${0:N2}" ItemStyle-CssClass="price-column" />
                     <asp:TemplateField HeaderText="Actions">
                         <ItemTemplate>
                             <asp:Button ID="BtnViewDetail" runat="server" Text="View Details" 

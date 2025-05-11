@@ -49,13 +49,27 @@ namespace Proyek_Pattern_Software_Design.Repository
 
             if (jewel != null)
             {
+                var relatedTransactionDetails = db.TransactionDetails
+                                                  .Where(td => td.JewelID == jewelID)
+                                                  .ToList();
+                foreach (var td in relatedTransactionDetails)
+                {
+                    db.TransactionDetails.Remove(td);
+                }
+                
                 var relatedCarts = db.Carts.Where(c => c.JewelID == jewelID).ToList();
+                foreach (var cart in relatedCarts)
+                {
+                    db.Carts.Remove(cart);
+                }
+
                 db.MsJewels.Remove(jewel);
                 db.SaveChanges();
             }
 
             return jewel;
         }
+
         public bool updateJewel(int jewelID, string name, int categoryID, int brandID, int price, int year)
         {
             MsJewel jewel = db.MsJewels.Find(jewelID);
