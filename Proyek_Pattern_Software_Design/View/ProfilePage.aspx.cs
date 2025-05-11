@@ -32,7 +32,9 @@ namespace Proyek_Pattern_Software_Design.View
                         Session["Role"] = user.UserRole;
                     }
                 }
-                
+                lblUsername.Text = ((MsUser)Session["User"]).UserName;
+                lblEmail.Text = ((MsUser)Session["User"]).UserEmail;
+
             }
 		}
 

@@ -82,7 +82,7 @@ namespace Proyek_Pattern_Software_Design.View
             if (user != null)
             {
                 cartController.AddToCart(user.UserID, jewelID);
-                Response.Redirect("~/View/Cart.aspx");
+                Response.Redirect("~/View/CartPage.aspx");
             }
         }
 
