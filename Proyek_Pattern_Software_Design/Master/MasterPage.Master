@@ -5,26 +5,113 @@
 <html>
 <head runat="server">
     <title>JAwels&Diamonds</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #4B6CB7 0%, #182848 100%);
+            padding: 15px 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-brand {
+            color: white;
+            font-size: 1.5em;
+            font-weight: 600;
+            text-decoration: none;
+            margin-right: 30px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .nav-button {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-button:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+        }
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .welcome-text {
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .content-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                justify-content: center;
+            }
+            .user-section {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <asp:Button ID="ButtonHome" runat="server" Text="Home" OnClick="ButtonHome_Click" />
-            <asp:Button ID="ButtonLogin" runat="server" Text="Login" OnClick="ButtonLogin_Click" />
-            <asp:Button ID="ButtonRegister" runat="server" Text="Register" OnClick="ButtonRegister_Click" />
-            <asp:Button ID="ButtonCart" runat="server" Text="Cart" OnClick="ButtonCart_Click" />
-            <asp:Button ID="ButtonMyOrders" runat="server" Text="My Orders" OnClick="ButtonMyOrders_Click1" />
-            <asp:Button ID="ButtonAddJewel" runat="server" Text="Add Jewel" OnClick="ButtonAddJewel_Click" />
-            <asp:Button ID="ButtonReports" runat="server" Text="Reports" OnClick="ButtonReports_Click" />
-            <asp:Button ID="ButtonHandleOrders" runat="server" Text="Handle Orders" OnClick="ButtonHandleOrders_Click" />
-            <asp:Button ID="ButtonProfile" runat="server" Text="Profile" OnClick="ButtonProfile_Click" />
-            <asp:Button ID="ButtonLogOut" runat="server" Text="Logout" OnClick="ButtonLogOut_Click" />
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="~/View/Homepage.aspx" runat="server" class="nav-brand">JAwels&Diamonds</a>
+                
+                <div class="nav-links">
+                    <asp:Button ID="ButtonHome" runat="server" Text="Home" OnClick="ButtonHome_Click" CssClass="nav-button" />
+                    <asp:Button ID="ButtonLogin" runat="server" Text="Login" OnClick="ButtonLogin_Click" CssClass="nav-button" />
+                    <asp:Button ID="ButtonRegister" runat="server" Text="Register" OnClick="ButtonRegister_Click" CssClass="nav-button" />
+                    <asp:Button ID="ButtonCart" runat="server" Text="Cart" OnClick="ButtonCart_Click" CssClass="nav-button" />
+                    <asp:Button ID="ButtonMyOrders" runat="server" Text="My Orders" OnClick="ButtonMyOrders_Click1" CssClass="nav-button" />
+                    <asp:Button ID="ButtonAddJewel" runat="server" Text="Add Jewel" OnClick="ButtonAddJewel_Click" CssClass="nav-button" />
+                    <asp:Button ID="ButtonReports" runat="server" Text="Reports" OnClick="ButtonReports_Click" CssClass="nav-button" />
+                    <asp:Button ID="ButtonHandleOrders" runat="server" Text="Handle Orders" OnClick="ButtonHandleOrders_Click" CssClass="nav-button" />
+                    <asp:Button ID="ButtonProfile" runat="server" Text="Profile" OnClick="ButtonProfile_Click" CssClass="nav-button" />
+                    <asp:Button ID="ButtonLogOut" runat="server" Text="Logout" OnClick="ButtonLogOut_Click" CssClass="nav-button" />
+                </div>
 
-        </div>
-        <div>
-            <asp:Label ID="Labelhello" runat="server" Text=""></asp:Label>
-        </div>
-        <div>
+                <div class="user-section">
+                    <asp:Label ID="Labelhello" runat="server" CssClass="welcome-text" />
+                </div>
+            </div>
+        </nav>
+
+        <div class="content-wrapper">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>

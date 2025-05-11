@@ -13,8 +13,28 @@ namespace Proyek_Pattern_Software_Design.View
 	public partial class HandleOrder : System.Web.UI.Page
 	{
         TransactionController transactionController = new TransactionController();
+        UserController controller = new UserController();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["User"] == null && Request.Cookies["Cookie"] == null)
+            {
+                Response.Redirect("~/View/Homepage.aspx");
+            }
+            HttpCookie cookie = Request.Cookies["Cookie"];
+            if (cookie != null)
+            {
+                int userID = Convert.ToInt32(cookie.Value);
+                MsUser user = controller.getUserByID(userID);
+                if (user != null)
+                {
+                    Session["User"] = user;
+                    Session["Role"] = user.UserRole;
+                }
+            }
+            if(Session["Role"] == null || Session["Role"].ToString() != "Admin")
+            {
+                Response.Redirect("~/View/HomePage.aspx");
+            }
             string eventTarget = Request["__EVENTTARGET"];
             string eventArgument = Request["__EVENTARGUMENT"];
 
