@@ -48,13 +48,13 @@ namespace Proyek_Pattern_Software_Design.View
             report.SetDataSource(data);
         }
 
-        private DataSet1 getData(List<TransactionHeader> transactions)
+        private DataSet1 getData(List<Proyek_Pattern_Software_Design.Model.TransactionHeader> transactions)
         {
             DataSet1 dataSet = new DataSet1();
             var headerTable = dataSet.TransactionHeader;
             var detailTable = dataSet.TransactionDetail;
 
-            foreach (TransactionHeader t in transactions)
+            foreach (Proyek_Pattern_Software_Design.Model.TransactionHeader t in transactions)
             {
                 var hrow = headerTable.NewRow();
                 hrow["TransactionID"] = t.TransactionID;
@@ -64,7 +64,7 @@ namespace Proyek_Pattern_Software_Design.View
                 hrow["PaymentMethod"] = t.PaymentMethod;
                 headerTable.Rows.Add(hrow);
 
-                foreach (TransactionDetail d in t.TransactionDetails)
+                foreach (Proyek_Pattern_Software_Design.Model.TransactionDetail d in t.TransactionDetails)
                 {
                     var drow = detailTable.NewRow();
                     drow["TransactionID"] = d.TransactionID;

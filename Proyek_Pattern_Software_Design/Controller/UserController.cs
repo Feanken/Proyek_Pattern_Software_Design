@@ -90,5 +90,9 @@ namespace Proyek_Pattern_Software_Design.Controller
         {
             return userHandler.getUserByID(userID);
         }
+        public void updatePassword(int userID, string newPassword)
+        {
+            userHandler.updatePassword(userID, newPassword);
+        }
     }
 }

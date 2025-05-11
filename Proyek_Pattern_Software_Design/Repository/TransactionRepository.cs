@@ -12,6 +12,7 @@ namespace Proyek_Pattern_Software_Design.Repository
     {
         Database1Entities db = DatabaseConnection.getInstance().getDB();
         CartRepository cartRepository = new CartRepository();
+        JewelRepository jewelRepository = new JewelRepository();
         public List<TransactionHeader> GetUnfinishedOrders()
         {
             return db.TransactionHeaders
@@ -34,7 +35,7 @@ namespace Proyek_Pattern_Software_Design.Repository
                  .Include("TransactionDetails")
                  .Where(t => t.TransactionStatus == "Done")
                  .ToList();
-            
+
         }
         public void createTransaction(int userID, string paymentMethod)
         {
@@ -57,6 +58,26 @@ namespace Proyek_Pattern_Software_Design.Repository
                 db.TransactionDetails.Add(detail);
                 db.SaveChanges();
             }
+        }
+        public List<TransactionHeader> getTransactionByUserId(int userId)
+        {
+            return db.TransactionHeaders
+                .Include("TransactionDetails")
+                .Where(t => t.UserID == userId)
+                .ToList();
+        }   
+        public List<TransactionDetailModel> getTransactionDetailByTransactionId(int transactionId)
+        {
+            List<TransactionDetailModel> transactionDetails = db.TransactionDetails
+                                    .Where(td => td.TransactionID == transactionId)
+                                    .Select(td => new TransactionDetailModel
+                                    {
+                                        TransactionID = td.TransactionID,
+                                        JewelName = td.MsJewel.JewelName, 
+                                        Quantity =(int)td.Quantity
+                                    })
+                                    .ToList();
+            return transactionDetails;
         }
     }
 }

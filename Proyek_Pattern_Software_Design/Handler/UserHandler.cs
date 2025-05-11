@@ -34,5 +34,9 @@ namespace Proyek_Pattern_Software_Design.Handler
         {
             return repository.getUserById(ID);
         }
+        public void updatePassword(int userID, string newPassword)
+        {
+            repository.updatePassword(userID, newPassword);
+        }
     }
 }
