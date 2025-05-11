@@ -81,31 +81,18 @@ namespace Proyek_Pattern_Software_Design.View
 
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            try
-            {
-                int jewelId = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value);
-                GridViewRow row = GridView1.Rows[e.RowIndex];
-                TextBox txtQty = (TextBox)row.FindControl("txtQuantity");
-                MsUser userlogin = (MsUser)Session["User"];
-                int userID = Convert.ToInt32(userlogin.UserID);
-                int newQty;
+            int jewelId = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value);
+            GridViewRow row = GridView1.Rows[e.RowIndex];
+            TextBox txtQty = (TextBox)row.FindControl("txtQuantity");
+            MsUser userlogin = (MsUser)Session["User"];
+            int userID = Convert.ToInt32(userlogin.UserID);
+            int newQty;
 
-                if (int.TryParse(txtQty.Text, out newQty) && newQty > 0)
-                {
-                    cartController.updateQuantity(userID, jewelId, newQty);
-                    GridView1.EditIndex = -1;
-                    LoadCartData();
-                }
-                else
-                {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
-                        "alert('Please enter a valid quantity greater than 0.');", true);
-                }
-            }
-            catch (Exception ex)
+            if (int.TryParse(txtQty.Text, out newQty) && newQty > 0)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert",
-                    $"alert('Error updating quantity: {ex.Message}');", true);
+                cartController.updateQuantity(userID, jewelId, newQty);
+                GridView1.EditIndex = -1;
+                LoadCartData();
             }
         }
 

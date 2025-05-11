@@ -36,5 +36,14 @@ namespace Proyek_Pattern_Software_Design.Repository
         {
             return db.MsUsers.Where(u => u.UserEmail.Equals(email)).FirstOrDefault();
         }
+        public void updatePassword(int userID, string newPassword)
+        {
+            MsUser user = db.MsUsers.Where(u => u.UserID.Equals(userID)).FirstOrDefault();
+            if (user != null)
+            {
+                user.UserPassword = newPassword;
+                db.SaveChanges();
+            }
+        }
     }
 }

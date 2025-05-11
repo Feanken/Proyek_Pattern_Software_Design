@@ -33,5 +33,13 @@ namespace Proyek_Pattern_Software_Design.Handler
         {
             transactionRepository.createTransaction(userID, paymentMethod);
         }
+        public List<TransactionHeader> getTransactionsByUserId(int userId)
+        {
+            return transactionRepository.getTransactionByUserId(userId);
+        }
+        public List<TransactionDetailModel> getTransactionDetailByTransactionId(int transactionId)
+        {
+            return transactionRepository.getTransactionDetailByTransactionId(transactionId);
+        }
     }
 }

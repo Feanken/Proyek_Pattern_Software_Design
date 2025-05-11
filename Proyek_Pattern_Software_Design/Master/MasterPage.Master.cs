@@ -66,17 +66,17 @@ namespace Proyek_Pattern_Software_Design.Master
 
         protected void ButtonCart_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/View/CartPage.aspx");
         }
 
         protected void ButtonMyOrders_Click1(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/View/MyOrderPage.aspx");
         }
 
         protected void ButtonProfile_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/View/ProfilePage.aspx");
         }
         protected void setButtonVisibility()
         {
@@ -112,7 +112,7 @@ namespace Proyek_Pattern_Software_Design.Master
 
         protected void ButtonReports_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/View/ReportPage.aspx");
         }
 
         protected void ButtonHandleOrders_Click(object sender, EventArgs e)
