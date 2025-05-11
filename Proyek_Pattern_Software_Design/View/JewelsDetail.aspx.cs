@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -28,6 +29,10 @@ namespace Proyek_Pattern_Software_Design.View
                     Session["User"] = user;
                     Session["Role"] = user.UserRole;
                 }
+            }
+            if (Session["Role"] == null && Session["User"] == null)
+            { 
+                Response.Redirect("~/View/HomePage.aspx");
             }
             if (!IsPostBack)
             {
