@@ -16,6 +16,8 @@ namespace Proyek_Pattern_Software_Design.View
         UserController controller = new UserController();
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            LabelMessage.Visible = false;
             if (Session["User"] == null && Request.Cookies["Cookie"] == null)
             {
                 Response.Redirect("~/View/Homepage.aspx");
@@ -74,7 +76,11 @@ namespace Proyek_Pattern_Software_Design.View
                 int transactionID = int.Parse(args[0]);
                 string newStatus = args[1];
 
+
                 bool updated = transactionController.UpdateTransactionStatus(transactionID, newStatus);
+                LabelMessage.Visible = true;
+                LabelMessage.Text = updated ? "Status updated." : "Failed to update.";
+                LabelMessage.CssClass = updated ? "success-message" : "error-message";
                 LabelMessage.Text = updated ? "Status updated." : "Failed to update.";
                 LoadOrders();
             }
