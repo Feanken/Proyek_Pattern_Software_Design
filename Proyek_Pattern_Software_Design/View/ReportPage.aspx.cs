@@ -58,16 +58,12 @@ namespace Proyek_Pattern_Software_Design.View
             foreach (var t in transactions)
             {
                 decimal totalTransaction = 0;
-
-                // Tambah ke header
                 var hrow = headerTable.NewRow();
                 hrow["TransactionID"] = t.TransactionID;
                 hrow["UserID"] = t.UserID;
                 hrow["TransactionDate"] = t.TransactionDate;
                 hrow["PaymentMethod"] = t.PaymentMethod;
                 hrow["TransactionStatus"] = t.TransactionStatus;
-                headerTable.Rows.Add(hrow);
-
                 foreach (var d in t.TransactionDetails)
                 {
                     var jewel = jewelController.getJewelByID(d.JewelID);
@@ -76,8 +72,6 @@ namespace Proyek_Pattern_Software_Design.View
                     decimal price = Convert.ToDecimal(jewel.JewelPrice);
                     decimal subtotal = price * Convert.ToDecimal(d.Quantity);
                     totalTransaction += subtotal;
-
-                    // Tambah ke detail
                     var drow = detailTable.NewRow();
                     drow["TransactionID"] = d.TransactionID;
                     drow["JewelID"] = d.JewelID;
@@ -85,8 +79,6 @@ namespace Proyek_Pattern_Software_Design.View
                     drow["Price"] = price;
                     drow["Subtotal"] = subtotal;
                     detailTable.Rows.Add(drow);
-
-                    // Tambah ke MsJewel jika belum ada
                     bool jewelExists = jewelTable.AsEnumerable()
                         .Any(row => Convert.ToInt32(row["JewelID"]) == jewel.JewelID);
                     if (!jewelExists)
@@ -101,9 +93,8 @@ namespace Proyek_Pattern_Software_Design.View
                         jewelTable.Rows.Add(jrow);
                     }
                 }
-
-                // Set Subtotal ke header terakhir (harus setelah loop detail)
                 hrow["Subtotal"] = totalTransaction;
+                headerTable.Rows.Add(hrow);
             }
 
             return dataSet;
