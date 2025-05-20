@@ -16,14 +16,14 @@ namespace Proyek_Pattern_Software_Design.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ReportTransaction : ReportClass {
+    public class TransactionReport : ReportClass {
         
-        public ReportTransaction() {
+        public TransactionReport() {
         }
         
         public override string ResourceName {
             get {
-                return "ReportTransaction.rpt";
+                return "TransactionReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Proyek_Pattern_Software_Design.Reports {
         
         public override string FullResourceName {
             get {
-                return "Proyek_Pattern_Software_Design.Reports.ReportTransaction.rpt";
+                return "Proyek_Pattern_Software_Design.Reports.TransactionReport.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace Proyek_Pattern_Software_Design.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReportTransaction : Component, ICachedReport {
+    public class CachedTransactionReport : Component, ICachedReport {
         
-        public CachedReportTransaction() {
+        public CachedTransactionReport() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace Proyek_Pattern_Software_Design.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ReportTransaction rpt = new ReportTransaction();
+            TransactionReport rpt = new TransactionReport();
             rpt.Site = this.Site;
             return rpt;
         }
