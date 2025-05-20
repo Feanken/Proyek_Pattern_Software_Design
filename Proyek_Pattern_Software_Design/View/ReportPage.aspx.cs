@@ -5,6 +5,7 @@ using Proyek_Pattern_Software_Design.Model;
 using Proyek_Pattern_Software_Design.Reports;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -47,17 +48,31 @@ namespace Proyek_Pattern_Software_Design.View
             TransactionDataSet data = getData(transactionController.getTransaction());
             report.SetDataSource(data);
         }
-
+        private int getTotal(List<Proyek_Pattern_Software_Design.Model.TransactionHeader> transactions)
+        {
+            int total = 0;
+            foreach (var t in transactions)
+            {
+                foreach (var d in t.TransactionDetails)
+                {
+                    MsJewel jewel = jewelController.getJewelByID(d.JewelID);
+                    if (jewel == null) continue;
+                    decimal price = Convert.ToDecimal(jewel.JewelPrice);
+                    decimal subtotal = price * Convert.ToDecimal(d.Quantity);
+                    total += Convert.ToInt32(subtotal);
+                }
+            }
+            return total;
+        }
         private TransactionDataSet getData(List<Proyek_Pattern_Software_Design.Model.TransactionHeader> transactions)
         {
             TransactionDataSet dataSet = new TransactionDataSet();
             var headerTable = dataSet.TransactionHeader;
             var detailTable = dataSet.TransactionDetail;
             var jewelTable = dataSet.MsJewel;
-
+            int total = getTotal(transactions);
             foreach (var t in transactions)
             {
-                decimal totalTransaction = 0;
                 var hrow = headerTable.NewRow();
                 hrow["TransactionID"] = t.TransactionID;
                 hrow["UserID"] = t.UserID;
@@ -71,7 +86,6 @@ namespace Proyek_Pattern_Software_Design.View
 
                     decimal price = Convert.ToDecimal(jewel.JewelPrice);
                     decimal subtotal = price * Convert.ToDecimal(d.Quantity);
-                    totalTransaction += subtotal;
                     var drow = detailTable.NewRow();
                     drow["TransactionID"] = d.TransactionID;
                     drow["JewelID"] = d.JewelID;
@@ -93,7 +107,7 @@ namespace Proyek_Pattern_Software_Design.View
                         jewelTable.Rows.Add(jrow);
                     }
                 }
-                hrow["Subtotal"] = totalTransaction;
+                hrow["Subtotal"] = total;
                 headerTable.Rows.Add(hrow);
             }
 
