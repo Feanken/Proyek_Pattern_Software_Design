@@ -2374,11 +2374,6 @@
     <Compile Include="Controller\JewelController.cs" />
     <Compile Include="Controller\TransactionController.cs" />
     <Compile Include="Controller\UserController.cs" />
-    <Compile Include="DataSet\DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DataSet\TransactionDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2549,17 +2544,6 @@
     </EntityDeploy>
     <Content Include="Model\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="DataSet\DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Content>
-    <None Include="DataSet\DataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="DataSet\DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
     </Content>
     <Content Include="DataSet\TransactionDataSet.xsc">
       <DependentUpon>TransactionDataSet.xsd</DependentUpon>
