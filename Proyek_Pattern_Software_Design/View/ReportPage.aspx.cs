@@ -48,12 +48,30 @@ namespace Proyek_Pattern_Software_Design.View
             report.SetDataSource(data);
         }
 
+        private int getTotal(List<Proyek_Pattern_Software_Design.Model.TransactionHeader> transactions)
+        {
+            int total = 0;
+            foreach (var t in transactions)
+            {
+                foreach (var d in t.TransactionDetails)
+                {
+                    MsJewel jewel = jewelController.getJewelByID(d.JewelID);
+                    if (jewel == null) continue;
+                    decimal price = Convert.ToDecimal(jewel.JewelPrice);
+                    decimal subtotal = price * Convert.ToDecimal(d.Quantity);
+                    total += Convert.ToInt32(subtotal);
+                }
+            }
+            return total;
+        }
+
         private DataSet1 getData(List<Proyek_Pattern_Software_Design.Model.TransactionHeader> transactions)
         {
             DataSet1 dataSet = new DataSet1();
             var headerTable = dataSet.TransactionHeader;
             var detailTable = dataSet.TransactionDetail;
-            decimal totalAll = 0;
+            decimal totalAll = getTotal(transactions); 
+
             foreach (Proyek_Pattern_Software_Design.Model.TransactionHeader t in transactions)
             {
                 var hrow = headerTable.NewRow();    
@@ -62,6 +80,7 @@ namespace Proyek_Pattern_Software_Design.View
                 hrow["TransactionDate"] = t.TransactionDate;
                 hrow["TransactionStatus"] = t.TransactionStatus;
                 hrow["PaymentMethod"] = t.PaymentMethod;
+                hrow["Subtotal"] = totalAll;
                 headerTable.Rows.Add(hrow);
 
                 foreach (Proyek_Pattern_Software_Design.Model.TransactionDetail d in t.TransactionDetails)
@@ -70,15 +89,11 @@ namespace Proyek_Pattern_Software_Design.View
                     drow["TransactionID"] = d.TransactionID;
                     drow["JewelID"] = d.JewelID;
                     drow["Quantity"] = d.Quantity;
-                    MsJewel jewel = jewelController.getJewelByID(d.JewelID);
-                    decimal price = Convert.ToDecimal(jewel.JewelPrice);
-                    decimal subtotal = price * Convert.ToDecimal(d.Quantity);
-                    totalAll += subtotal;
-                    drow["Price"] = price;
-                    drow["Subtotal"] = subtotal;
+                    drow["Price"] = d.MsJewel.JewelPrice;
+                    drow["Subtotal"] = d.MsJewel.JewelPrice *  d.Quantity;
                     detailTable.Rows.Add(drow);
                 }
-                hrow["Subtotal"] = totalAll;
+                
             }
             return dataSet;
         }
