@@ -42,45 +42,72 @@ namespace Proyek_Pattern_Software_Design.View
                 Response.Redirect("~/View/HomePage.aspx");
             }
 
-            ReportTransaction report = new ReportTransaction();
+            TransactionReport report = new TransactionReport();
             CrystalReportViewer1.ReportSource = report;
-            DataSet1 data = getData(transactionController.getTransaction());
+            TransactionDataSet data = getData(transactionController.getTransaction());
             report.SetDataSource(data);
         }
 
-        private DataSet1 getData(List<Proyek_Pattern_Software_Design.Model.TransactionHeader> transactions)
+        private TransactionDataSet getData(List<Proyek_Pattern_Software_Design.Model.TransactionHeader> transactions)
         {
-            DataSet1 dataSet = new DataSet1();
+            TransactionDataSet dataSet = new TransactionDataSet();
             var headerTable = dataSet.TransactionHeader;
             var detailTable = dataSet.TransactionDetail;
-            decimal totalAll = 0;
-            foreach (Proyek_Pattern_Software_Design.Model.TransactionHeader t in transactions)
+            var jewelTable = dataSet.MsJewel;
+
+            foreach (var t in transactions)
             {
-                var hrow = headerTable.NewRow();    
+                decimal totalTransaction = 0;
+
+                // Tambah ke header
+                var hrow = headerTable.NewRow();
                 hrow["TransactionID"] = t.TransactionID;
                 hrow["UserID"] = t.UserID;
                 hrow["TransactionDate"] = t.TransactionDate;
-                hrow["TransactionStatus"] = t.TransactionStatus;
                 hrow["PaymentMethod"] = t.PaymentMethod;
+                hrow["TransactionStatus"] = t.TransactionStatus;
                 headerTable.Rows.Add(hrow);
 
-                foreach (Proyek_Pattern_Software_Design.Model.TransactionDetail d in t.TransactionDetails)
+                foreach (var d in t.TransactionDetails)
                 {
+                    var jewel = jewelController.getJewelByID(d.JewelID);
+                    if (jewel == null) continue;
+
+                    decimal price = Convert.ToDecimal(jewel.JewelPrice);
+                    decimal subtotal = price * Convert.ToDecimal(d.Quantity);
+                    totalTransaction += subtotal;
+
+                    // Tambah ke detail
                     var drow = detailTable.NewRow();
                     drow["TransactionID"] = d.TransactionID;
                     drow["JewelID"] = d.JewelID;
                     drow["Quantity"] = d.Quantity;
-                    MsJewel jewel = jewelController.getJewelByID(d.JewelID);
-                    decimal price = Convert.ToDecimal(jewel.JewelPrice);
-                    decimal subtotal = price * Convert.ToDecimal(d.Quantity);
-                    totalAll += subtotal;
                     drow["Price"] = price;
                     drow["Subtotal"] = subtotal;
                     detailTable.Rows.Add(drow);
+
+                    // Tambah ke MsJewel jika belum ada
+                    bool jewelExists = jewelTable.AsEnumerable()
+                        .Any(row => Convert.ToInt32(row["JewelID"]) == jewel.JewelID);
+                    if (!jewelExists)
+                    {
+                        var jrow = jewelTable.NewRow();
+                        jrow["JewelID"] = jewel.JewelID;
+                        jrow["BrandID"] = jewel.BrandID;
+                        jrow["CategoryID"] = jewel.CategoryID;
+                        jrow["JewelName"] = jewel.JewelName;
+                        jrow["JewelPrice"] = jewel.JewelPrice;
+                        jrow["JewelReleaseYear"] = jewel.JewelReleaseYear;
+                        jewelTable.Rows.Add(jrow);
+                    }
                 }
-                hrow["Subtotal"] = totalAll;
+
+                // Set Subtotal ke header terakhir (harus setelah loop detail)
+                hrow["Subtotal"] = totalTransaction;
             }
+
             return dataSet;
         }
+
     }
 }
