@@ -164,35 +164,42 @@
                     </asp:RadioButtonList>
                 </div>
             </div>
+            <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
-            <div class="calendar-container">
-                <asp:Label ID="LabelDateofBirth" runat="server" Text="Date of Birth"></asp:Label>
-                <div class="calendar">
-                    <asp:Calendar ID="CalendarDateofBirth" runat="server" 
-                        BackColor="White" 
-                        BorderColor="#ddd"
-                        BorderWidth="1px"
-                        CellPadding="1"
-                        DayNameFormat="Shortest"
-                        Font-Names="Verdana"
-                        Font-Size="8pt"
-                        ForeColor="#333333"
-                        Height="200px"
-                        Width="100%"
-                        OnSelectionChanged="CalendarDateofBirth_SelectionChanged1">
-                        <DayHeaderStyle BackColor="#4B6CB7" ForeColor="White" Height="1px" />
-                        <NextPrevStyle Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
-                        <OtherMonthDayStyle ForeColor="#999999" />
-                        <SelectedDayStyle BackColor="#4B6CB7" ForeColor="White" />
-                        <TitleStyle BackColor="White" BorderColor="Black" Font-Bold="True" />
-                        <TodayDayStyle BackColor="#f8f9fa" ForeColor="#333333" />
-                    </asp:Calendar>
-                </div>
-            </div>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <div class="calendar-container">
+                        <asp:Label ID="LabelDateofBirth" runat="server" Text="Date of Birth"></asp:Label>
+                        <div class="calendar">
+                            <asp:Calendar ID="CalendarDateofBirth" runat="server"
+                                BackColor="White"
+                                BorderColor="#ddd"
+                                BorderWidth="1px"
+                                CellPadding="1"
+                                DayNameFormat="Shortest"
+                                Font-Names="Verdana"
+                                Font-Size="8pt"
+                                ForeColor="#333333"
+                                Height="200px"
+                                Width="100%"
+                                OnSelectionChanged="CalendarDateofBirth_SelectionChanged1"
+                                AutoPostBack="true">
+                                <DayHeaderStyle BackColor="#4B6CB7" ForeColor="White" Height="1px" />
+                                <NextPrevStyle Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />
+                                <OtherMonthDayStyle ForeColor="#999999" />
+                                <SelectedDayStyle BackColor="#4B6CB7" ForeColor="White" />
+                                <TitleStyle BackColor="White" BorderColor="Black" Font-Bold="True" />
+                                <TodayDayStyle BackColor="#f8f9fa" ForeColor="#333333" />
+                            </asp:Calendar>
+                        </div>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+
 
             <asp:Label ID="LabelStatus" runat="server" Text="" CssClass="status-label"></asp:Label>
 
-            <asp:Button ID="ButtonRegister" runat="server" Text="Register" OnClick="ButtonRegister_Click" CssClass="btn-register"/>
+            <asp:Button ID="ButtonRegister" runat="server" Text="Register" OnClick="ButtonRegister_Click" CssClass="btn-register" />
 
             <div class="login-link">
                 <asp:LinkButton ID="LinkButtonLogin" runat="server" OnClick="LinkButtonLogin_Click">Already have an account? Login here</asp:LinkButton>

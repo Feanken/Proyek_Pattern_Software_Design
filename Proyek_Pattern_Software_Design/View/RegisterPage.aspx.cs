@@ -75,7 +75,9 @@ namespace Proyek_Pattern_Software_Design.View
 
         protected void CalendarDateofBirth_SelectionChanged1(object sender, EventArgs e)
         {
-
+            LabelStatus.ForeColor = Color.Blue;
+            LabelStatus.Text = "You selected: " + CalendarDateofBirth.SelectedDate.ToString("dd MMM yyyy");
         }
+
     }
 }
