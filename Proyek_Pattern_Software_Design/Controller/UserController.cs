@@ -17,12 +17,12 @@ namespace Proyek_Pattern_Software_Design.Controller
         {
             if (email == null || pass == null)
             {
-                return new Response<MsUser>(400, "email or Password is empty", null);
+                return new Response<MsUser>(400, "Email or Password is empty", null);
             }
             MsUser loginuser = userHandler.getUser(email, pass);
             if (loginuser == null)
             {
-                return new Response<MsUser>(400, "Username or password invalid", null);
+                return new Response<MsUser>(400, "Email or password invalid", null);
             }
             return new Response<MsUser>(200, "User is valid", loginuser);
         }
